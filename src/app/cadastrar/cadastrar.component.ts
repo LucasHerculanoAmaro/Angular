@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from '../model/Usuario';
 import { AuthService } from '../service/auth.service';
 
@@ -14,14 +15,17 @@ export class CadastrarComponent implements OnInit {
 
   constructor(
     
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router
+    ) { }
+   
 
-  ngOnInit(): void {                            //responsavel por iniciar a página dando
+  ngOnInit() {    
+    window.scroll(0,0)                        //responsavel por iniciar a página dando
   }
 
-  confirmeSenha(event:any){                     // criando evento para receber as senhas
+  confirmeSenha(event: any){                     // criando evento para receber as senhas
     this.confirmarSenha = event.target.value    //chamando o confirmar senha
-
   }
 
   cadastrarUsuario() {
@@ -29,8 +33,9 @@ export class CadastrarComponent implements OnInit {
       alert("Senhas não compatíveis!")
     }
     else {//vai sobrescrever a senha em formato json
-      this.authService.Cadastrar(this.usuario).subscribe((resp:Usuario) => {
+      this.authService.Cadastrar(this.usuario).subscribe((resp: Usuario) => {
         this.usuario = resp
+        this.router.navigate(['/entrar'])
         alert("você foi cadastrado com sucesso!")
       }); 
     }
