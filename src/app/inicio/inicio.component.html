@@ -1,32 +1,32 @@
 <div class="container-fluid">
 
-    <div class="row bg-secondary align-items-center">
+    <div class="row bg-black align-items-center">
         <div class="col-md-6">
 
             <div class="row d-flex justify-content-center">
-                <div class="col-md-6 text-white">
+                <div class="col-md-6 text-warning">
                     <h1 class="fs-54">Seja bem vindo(a)!</h1>
                     <h5 class="fs-18">Expresse aqui os seus pensamentos e opiniões!</h5>
                 </div>
             </div>
 
             <div class="row d-flex justify-content-center mt-3 mb-5">
-                <div class="col-md-6">
-                    <button class="btn btn-light mr-2" data-toggle="modal" data-target="#novaPostagem">Nova postagem</button>
-                    <a class="btn btn-outline-light" href="#postagens">Ver postagem</a>
+                <div class="col-md-6 text-warning">
+                    <button class="btn btn-warning mr-2" data-toggle="modal" data-target="#novaPostagem">Nova postagem</button>
+                    <a class="btn btn-outline-warning" href="#postagens">Ver postagem</a>
                 </div>
             </div>
 
         </div>
 
         <div class="col-md-6 d-flex justify-content-center">
-            <img src="https://i.imgur.com/OzkcVNZ.png" alt="" width="500px" height="500px">
+            <img src="https://i.imgur.com/tIAmS8f.png" alt="" width="500px" height="500px">
         </div>
 
     </div>
 </div>
 
-<div class="container mb-5 mt-5" id="postagens">
+<div class="container mb-5 mt-5, bg-light" id="postagens">
 
     <nav>
         <div class="nav nav-tabs s-flex justify-content-center" id="nav-tab" role="tablist">
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="texto">Escolha um tema ou <a href="">cadastre um novo</a>: </label>
+                        <label for="texto">Escolha um tema ou <a data-dismiss="modal" routerLink='/tema'>cadastre um novo</a>: </label>
                         <select name="tema" id="tema" class="form-control">
                             <option value="">Temas</option>
                         </select>
