@@ -2,4 +2,4 @@
 
 <router-outlet></router-outlet>
 
-<app-rodape></app-rodape>
+<app-rodape *ngIF="auth.logado()"></app-rodape>
