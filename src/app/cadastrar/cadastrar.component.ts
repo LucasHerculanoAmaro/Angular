@@ -1,7 +1,9 @@
+import { AlertasService } from './../service/alertas.service';
+import { AuthService } from './../service/auth.service';
+import { UserLogin } from './../model/UserLogin';
 import { Component, OnInit } from '@angular/core';
+import { User } from '../model/User';
 import { Router } from '@angular/router';
-import { Usuario } from '../model/Usuario';
-import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-cadastrar',
@@ -9,36 +11,43 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./cadastrar.component.css']
 })
 export class CadastrarComponent implements OnInit {
-  //criando um objeto para receber/referenciar a model usuario
-  usuario: Usuario = new Usuario
+
+  user: User = new User
   confirmarSenha: string
+  tipoUsuario: string
 
   constructor(
-    
     private authService: AuthService,
-    private router: Router
-    ) { }
-   
+    private router: Router,
+    private alertas: AlertasService
+  ) { }
 
-  ngOnInit() {    
-    window.scroll(0,0)                        //responsavel por iniciar a página dando
+  ngOnInit() {
+    window.scroll(0,0)
   }
 
-  confirmeSenha(event: any){                     // criando evento para receber as senhas
-    this.confirmarSenha = event.target.value    //chamando o confirmar senha
+  confirmSenha(event: any) {
+    this.confirmarSenha = event.target.value
   }
 
-  cadastrarUsuario() {
-    if (this.usuario.senha != this.confirmarSenha) {
-      alert("Senhas não compatíveis!")
-    }
-    else {//vai sobrescrever a senha em formato json
-      this.authService.Cadastrar(this.usuario).subscribe((resp: Usuario) => {
-        this.usuario = resp
+  tipoUser(event: any){
+    this.tipoUsuario = event.target.value
+  }
+
+  cadastrar(){
+    this.user.tipo = "o"
+
+    if(this.user.senha != this.confirmarSenha){
+      this.alertas.showAlertDanger('A senhas estão incorretas.')
+    } else {
+      this.authService.cadastrar(this.user).subscribe((resp: User) => {
+        this.user = resp
         this.router.navigate(['/entrar'])
-        alert("você foi cadastrado com sucesso!")
-      }); 
+        this.alertas.showAlertSuccess('Usuário cadastrado com sucesso!')
+      })
     }
+
   }
+
 
 }
